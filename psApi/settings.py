@@ -1,5 +1,5 @@
 import os
-
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -141,3 +141,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 JWT_SECRET ="n8l1v4h3g0t1f6h5p5p9n9d9z5y1q4j6y3q3n8k7k1w7x5y6l8o2f3j8g3s1e3f4i4v1"
 JWT_ALGORITHM ="HS256"
+django_heroku.settings(locals())
