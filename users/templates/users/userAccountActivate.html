@@ -1,0 +1,46 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS. Complete Account Activation </title>
+</head>
+
+<body>
+    <div class="wrapper" style="width:50%;margin:20px auto; display: flex; justify-content: center;text-align: center;flex-direction: column;">
+        <div><img src="{% static 'img/success.gif'%}" style="width:30rem;height:auto" alt="PS_LOGO" /><p>Loading...</p></div>
+        <span id="tokenHolder" data-token={{token}}></span>
+    </div>
+</body>
+
+<script>
+    window.addEventListener("load", function(){
+        var error = false;
+        var token  = document.getElementById("tokenHolder").dataset["token"];
+        fetch(`/user/complete-user-email-activation/${token}`, {
+            method:"GET",
+        }).then(res =>{
+            
+            if(res.status > 299){
+                error=true;
+                
+            }else{
+                error=false;
+            }
+            return res.json();
+        })
+        .then(data => {
+            if(error){
+                alert(data.message);
+            }else{
+                alert("User Account activated successfully :)");
+            }
+            console.log(data);
+        })
+    })
+</script>
+
+</html>
